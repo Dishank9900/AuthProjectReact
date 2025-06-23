@@ -1,16 +1,43 @@
+import { Button } from "@heroui/button";
+import { User } from "@heroui/user";
+import verify_11205003 from "../assets/verify_11205003.png";
+
 const Success: React.FC = () => {
+  // function handleClicking() {
+  //     Dashboard
+  // }
+
   return (
     <div className='bg-gray-100 flex items-center justify-center min-h-screen'>
       <div className='mx-auto flex max-w-xl items-top  rounded-xl  '>
-        <form className='flex flex-col bg-white rounded-xl shadow-lg p-18 mt-10 w-md'>
-          <h1 className='flex items-stretch mb-12 text-3xl'>
-            You are Logged In
-          </h1>
+        <form className='flex flex-col  bg-white rounded-xl shadow-lg p-18 mt-10 w-md'>
+          <div className='flex flex-col items-center mb-6'>
+            <img
+              src={verify_11205003}
+              alt='verify'
+              className='flex justify-center size-10 mb-15'
+            />
+            <User
+              avatarProps={{
+                src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+              }}
+              description='Product Designer'
+              name='Jane Doe'
+              id='jane-doe-123'
+            />
+            <h1 className='flex items-stretch mb-12 text-3xl'>
+              You are Logged In
+            </h1>
 
-          <div className=' flex flex-col rounded-2xl border-2 border-gray-100 p-10 mt-1 bg-amber-100 items-center'>
-            <button className='flex items-center justify-center h-12 px-6 w-32 bg-blue-500 mt-8 rounded font-semibold text-sm text-blue-50 hover:bg-blue-700 '>
+            <Button
+              variant='bordered'
+              color='primary'
+              size='lg'
+              radius='lg'
+              className='hover:scale-110 hover:bg-teal-500 hover:text-white hover:border-0 transition-all'
+            >
               Dashboard
-            </button>
+            </Button>
           </div>
         </form>
       </div>

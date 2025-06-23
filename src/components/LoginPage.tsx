@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import "tailwindcss";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
@@ -6,6 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Button } from "@heroui/button";
 import clsx from "clsx";
+import { toast } from "react-toastify";
 
 const LoginPage: React.FC = () => {
   const [phone, setPhone] = useState("");
@@ -13,9 +13,11 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   function handleClicking() {
-    if (isValid) navigate("/Verify");
-    else {
-      alert("Please enter a valid phone number");
+    if (isValid) {
+      localStorage.setItem("phone", phone);
+      navigate("/Verify");
+    } else {
+      toast.error("Please enter a valid phone number");
       setPhone("");
       setIsValid(false);
     }
@@ -50,22 +52,25 @@ const LoginPage: React.FC = () => {
                 autoFocus: true,
               }}
               inputClass={clsx(
-                "w-full !max-w-full border-b rounded-xl focus: outline-none focus:ring-2",
+                "!w-full !text-base !h-12 !bg-transparent !border-0 !border-b-2 !rounded-b-lg !pl-14 !pr-4 focus:!outline-none transition-all",
                 {
-                  "border-green-400 ring-green-200": isValid,
-                  "border-red-400 ring-red-200": !isValid,
-                  "border-stone-300": phone.length === 0,
+                  "!border-teal-500 focus:!ring-teal-300 rounded-xl": isValid,
+                  "!border-red-400 focus:!ring-red-200":
+                    !isValid && phone.length > 0,
+                  "!border-gray-300": phone.length === 0,
                 }
               )}
-              containerClass='w-full mb-4'
+              containerClass='!w-full !mb-6'
+              buttonClass='!border-none !bg-transparent'
             />
 
             <Button
-              variant='ghost'
+              variant='bordered'
               color='primary'
               size='lg'
               radius='lg'
-              className='flex justify-center w-1/3 mx-auto border border-gray-300 text-gray-700 hover:bg-teal-600 hover:text-white hover:rounded-lg  hover:w-1/2 transition-all'
+              className='hover:scale-110 hover:bg-teal-500 hover:text-white hover:border-0 transition-all'
+              // className='flex bg-white justify-center w-1/3 mx-auto border border-gray-300 text-gray-700 hover:bg-teal-600 hover:text-white hover:rounded-lg  hover:w-1/2 transition-all p-2'
               onPress={handleClicking}
             >
               Continue
