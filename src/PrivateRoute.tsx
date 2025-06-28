@@ -14,7 +14,7 @@ export const PrivateRoute = ({ children }: PrivateRouteProps) => {
   useEffect(() => {
     const checkIfUserValid = async () => {
       try {
-        const userToken = localStorage.getItem("userId");
+        const userToken = localStorage.getItem("token");
         if (!userToken)
           throw new Error("Failed to login! User token doesn't exist");
         const isUserValid = await checkUserValidity(userToken);
@@ -23,12 +23,21 @@ export const PrivateRoute = ({ children }: PrivateRouteProps) => {
         setLoading(false);
       } catch (error: any) {
         toast(error?.message || "Failed to login");
-        navigate("/login");
+        navigate("/");
       }
     };
     checkIfUserValid();
   }, [navigate]);
 
-  if (loading) return null; // or a loader
+  if (loading) {
+    return (
+      <div className='h-screen w-full flex items-center justify-center'>
+        <span className='text-lg font-semibold'>
+          Checking authentication...
+        </span>
+      </div>
+    );
+  }
+
   return <>{children}</>;
 };

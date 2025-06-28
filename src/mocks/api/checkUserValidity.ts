@@ -4,7 +4,7 @@ export const checkUserValidity = (token: string) => {
       setTimeout(() => {
         if (!token) return new Error("token not found");
         resolve(true);
-      }, 2000);
+      }, 0);
     } catch (error) {
       reject(error);
     }

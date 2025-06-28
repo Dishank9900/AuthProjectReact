@@ -8,7 +8,7 @@ export const getOtp = (countryCode: string, phoneNumber: string) => {
           return reject(new Error("Phone number nhi mila lawdee"));
         if (countryCode.length < 1 && countryCode.length > 3)
           return reject(new Error("Sahi country code bhej lawdee"));
-        if (phoneNumber.length !== 10)
+        if (phoneNumber.length < 8)
           return reject(new Error("Sahi number daal lawdee"));
         resolve(phoneNumber.slice(0, 4));
       }, 2000);
@@ -33,7 +33,7 @@ export const verifyOtp = (
           return reject(new Error("Phone number nhi mila lawdee"));
         if (countryCode.length < 1 && countryCode.length > 3)
           return reject(new Error("Sahi country code bhej lawdee"));
-        if (phoneNumber.length !== 10)
+        if (phoneNumber.length < 8)
           return reject(new Error("Sahi number daal lawdee"));
         if (otp !== phoneNumber.slice(0, 4))
           return reject(new Error("Galat otp hai lawdee"));
