@@ -8,13 +8,38 @@ import clsx from "clsx";
 import { toast } from "react-toastify";
 import { useAuth } from "../store/AuthContext";
 import { Navigate } from "react-router-dom";
+import { CardStackCarousel } from "../AceternityComponents/CardStackCarousel";
 import TransitionEffect from "./TransitionEffect";
+// import { BackgroundGradient } from "../AceternityComponents/BackgorundGradient";
+// import { AuroraBackground } from "../AceternityComponents/AuroraBackground";
 
 const LoginPage: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
+  const slideData = [
+    {
+      title: "Mystic Mountains",
+
+      src: "https://images.unsplash.com/photo-1494806812796-244fe51b774d?q=80&w=3534&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      title: "Urban Dreams",
+
+      src: "https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      title: "Neon Nights",
+
+      src: "https://images.unsplash.com/photo-1590041794748-2d8eb73a571c?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      title: "Desert Whispers",
+
+      src: "https://images.unsplash.com/photo-1679420437432-80cfbf88986c?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+  ];
 
   if (isLoggedIn) {
     return <Navigate to='/success' />;
@@ -33,24 +58,21 @@ const LoginPage: React.FC = () => {
 
   function HandleChangeNo(phone: string) {
     setPhone(phone);
-    if (phone.length > 8) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
+    setIsValid(phone.length > 8);
   }
 
   return (
     <TransitionEffect>
-      <div className='bg-gray-200 flex items-center justify-center min-h-screen '>
-        <div className='mx-auto flex max-w-xl items-top  rounded-xl '>
-          <form className='flex flex-col bg-white rounded-3xl shadow-lg p-18 mt-10 max-w-lg mx-auto'>
-            <h1 className='flex items-stretch mb-12 text-3xl'>LOGIN</h1>
-            <label className='font-semibold text-lg font-family:mono'>
+      {/* <AuroraBackground> */}
+      <div className='flex w-full min-h-screen '>
+        <div className='w-1/3 flex items-center justify-center bg-slate-400 '>
+          <form className='flex flex-col bg-slate-200 rounded-3xl shadow-lg p-12 '>
+            <h1 className='mb-8 text-3xl font-bold text-center'>LOGIN</h1>
+            <label className='font-semibold text-lg mb-2'>
               Enter Phone Number
             </label>
 
-            <div className=' flex flex-col rounded-2xl border-2 border-gray-200 p-10 mt-10 bg-white items-center w-full  max-w-md '>
+            <div className='flex flex-col rounded-2xl border-2 border-gray-200 p-6 mt-4 bg-slate-200 items-center w-full'>
               <PhoneInput
                 country={"in"}
                 value={phone}
@@ -75,25 +97,30 @@ const LoginPage: React.FC = () => {
 
               <Button
                 variant='bordered'
-                // color='primary'
                 size='lg'
                 radius='lg'
-                className='place-content-around bg-white text-teal-400 border-teal-400 border-2 hover:bg-teal-400 hover:border-teal-400 hover:text-white hover:scale-110'
-                //className='hover:scale-110 hover:bg-teal-500 hover:text-white hover:border-0 transition-all'
-                // className='flex bg-white justify-center w-1/3 mx-auto border border-gray-300 text-gray-700 hover:bg-teal-600 hover:text-white hover:rounded-lg  hover:w-1/2 transition-all p-2'
+                className='bg-slate-200 text-teal-400 border-teal-400 border-2 hover:bg-teal-400 hover:border-teal-400 hover:text-white hover:scale-110 transition-transform'
                 onPress={handleClicking}
               >
                 Continue
               </Button>
+
               <div className='flex mt-6 justify-center text-xs'>
-                <a className='text-sky-300  hover:text-blue-500' href='#'>
+                <a className='text-sky-300 hover:text-blue-500' href='#'>
                   Sign Up
                 </a>
               </div>
             </div>
           </form>
         </div>
+
+        <div className='w-2/3 bg-slate-400 flex items-center justify-center '>
+          <div className='relative overflow-hidden w-full h-full py-20'>
+            <CardStackCarousel slides={slideData} />
+          </div>
+        </div>
       </div>
+      {/* </AuroraBackground> */}
     </TransitionEffect>
   );
 };

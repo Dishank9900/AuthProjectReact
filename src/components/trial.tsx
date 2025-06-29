@@ -10,7 +10,7 @@ import { useAuth } from "../store/AuthContext";
 import { Navigate } from "react-router-dom";
 import TransitionEffect from "./TransitionEffect";
 
-const LoginPage: React.FC = () => {
+const Trial: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
@@ -40,7 +40,14 @@ const LoginPage: React.FC = () => {
     }
   }
 
-  return div;
+  return (
+    <>
+      <div className=' flex flex-row'>
+        <div className='flex max-w-1/3 '>hello world</div>
+        <div className='flex max-w-2/3'> image carousel</div>
+      </div>
+    </>
+  );
 };
 
-export default LoginPage;
+export default Trial;
